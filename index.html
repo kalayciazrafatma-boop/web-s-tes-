@@ -3,75 +3,115 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Genç Yazılımcılar Platformu</title>
+    <title>Topluluk Yönetim Paneli</title>
     <style>
-        /* Genel Stil Ayarları */
-        body { font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif; background-color: #f8f9fa; color: #333; margin: 0; padding: 0; }
-        header { background-color: #ffffff; padding: 40px 20px; text-align: center; border-bottom: 1px solid #eee; }
-        h1 { color: #2d3436; font-size: 2.5rem; margin-bottom: 10px; }
-        .subtitle { color: #636e72; font-size: 1.1rem; max-width: 600px; margin: 0 auto; }
-
-        /* Ekip Bölümü Konteynırı */
-        .container { max-width: 1100px; margin: 50px auto; padding: 0 20px; }
-        .team-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; }
-
-        /* Kart Stili */
-        .card { background: white; border-radius: 15px; padding: 30px; box-shadow: 0 4px 6px rgba(0,0,0,0.05); transition: transform 0.3s ease; border: 1px solid #f1f1f1; }
-        .card:hover { transform: translateY(-5px); }
+        body { font-family: 'Inter', sans-serif; background-color: #f4f7f6; color: #333; margin: 0; padding: 0; }
+        header { background-color: #ffffff; padding: 30px 20px; text-align: center; border-bottom: 2px solid #6c5ce7; }
         
-        .role { color: #0984e3; font-weight: bold; font-size: 0.9rem; text-transform: uppercase; letter-spacing: 1px; }
-        h2 { margin: 10px 0; font-size: 1.5rem; color: #2d3436; }
-        .bio { font-size: 0.95rem; line-height: 1.6; color: #4b4b4b; }
+        /* Filtreleme Menüsü */
+        .filter-container { max-width: 1200px; margin: 20px auto; text-align: center; padding: 0 10px; }
+        .filter-btn { 
+            background: #fff; border: 1px solid #ddd; color: #555;
+            padding: 8px 16px; border-radius: 20px; cursor: pointer;
+            margin: 4px; font-size: 0.85rem; transition: 0.3s;
+        }
+        .filter-btn:hover, .filter-btn.active { background: #6c5ce7; color: white; border-color: #6c5ce7; }
         
-        .badges { margin-top: 15px; }
-        .badge { display: inline-block; background: #dfe6e9; color: #2d3436; padding: 5px 10px; border-radius: 5px; font-size: 0.8rem; margin: 2px; font-weight: 500; }
+        /* Özel Aksiyon Butonları Renkleri */
+        .btn-announcement { border-color: #ffc107; color: #856404; }
+        .btn-announcement:hover, .btn-announcement.active { background: #ffc107; color: #fff; }
+        .btn-chat { border-color: #00b894; color: #00b894; }
+        .btn-chat:hover { background: #00b894; color: #fff; }
 
-        /* Yaş Gruplarına Göre Filtre/Etiket Tasarımı */
-        .target-audience { margin-top: 40px; text-align: center; }
-        .audience-tag { background: #6c5ce7; color: white; padding: 8px 15px; border-radius: 50px; font-size: 0.85rem; margin: 5px; }
+        /* İçerik Alanı */
+        .container { max-width: 1200px; margin: 20px auto; padding: 20px; }
+        
+        /* Duyurular Bölümü (Başlangıçta Gizli) */
+        #duyuru-alani { display: none; background: #fff3cd; border-left: 5px solid #ffc107; padding: 20px; border-radius: 12px; margin-bottom: 20px; }
+
+        /* Kart Izgarası */
+        .team-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; }
+        .card { background: white; border-radius: 12px; padding: 20px; box-shadow: 0 2px 10px rgba(0,0,0,0.05); transition: 0.3s; border-left: 5px solid #6c5ce7; }
+        .card:hover { transform: scale(1.02); }
+        
+        .group-label { font-size: 0.75rem; color: #6c5ce7; font-weight: bold; text-transform: uppercase; margin-bottom: 8px; display: block; }
+        h2 { margin: 5px 0; font-size: 1.2rem; }
     </style>
 </head>
 <body>
 
     <header>
-        <h1>Geleceğin Yazılımcıları</h1>
-        <p class="subtitle">Ortaokul, lise ve üniversite öğrencileri için teknoloji üretiyor, projeler geliştiriyoruz.</p>
-        <div class="target-audience">
-            <span class="audience-tag">Ortaokul</span>
-            <span class="audience-tag">Lise</span>
-            <span class="audience-tag">Üniversite</span>
-            <span class="audience-tag">Gençlik</span>
-        </div>
+        <h1>Topluluk Paneli</h1>
+        <p>Grupları filtreleyebilir, duyurulara bakabilir veya sohbete katılabilirsiniz.</p>
     </header>
 
+    <div class="filter-container">
+        <!-- Duyuru ve Sohbet Butonları (Başa ekledik) -->
+        <button class="filter-btn btn-announcement" onclick="showAnnouncements(this)">📢 Duyurular</button>
+        <button class="filter-btn btn-chat" onclick="window.open('SOHBET_LINKINIZ', '_blank')">💬 Genel Sohbet</button>
+        <hr style="border: 0; border-top: 1px solid #eee; margin: 15px 0;">
+        
+        <!-- Grup Filtreleri -->
+        <button class="filter-btn active" onclick="filterGroup('all', this)">Hepsi</button>
+        <button class="filter-btn" onclick="filterGroup('sanat-calisma', this)">Sanat Çalışma Grubu</button>
+        <button class="filter-btn" onclick="filterGroup('teknoloji-calisma', this)">Teknoloji Çalışma Grubu</button>
+        <button class="filter-btn" onclick="filterGroup('teknoloji-uni', this)">Teknoloji Üniversite Koor.</button>
+        <!-- Diğer 12 butonu buraya aynı formatta ekleyebilirsin Azra -->
+    </div>
+
     <div class="container">
-        <div class="team-grid">
-            
-            <!-- Azra'nın Kartı -->
-            <div class="card">
-                <span class="role">Siber Güvenlik & Geliştirici</span>
+        <!-- Duyuru İçeriği -->
+        <div id="duyuru-alani">
+            <h2>📢 Güncel Duyurular</h2>
+            <p>• Topluluğumuzun yeni web sitesi yayına girdi! (14.05.2024)</p>
+            <p>• Gelecek hafta Teknoloji Grubu toplantısı yapılacaktır.</p>
+        </div>
+
+        <!-- Üye Kartları -->
+        <div class="team-grid" id="team-grid">
+            <div class="card teknoloji-calisma teknoloji-uni">
+                <span class="group-label">Teknoloji & Üniversite Koor.</span>
                 <h2>Azra Fatma Kalaycı</h2>
-                <p class="bio">19 yaşında, 1. Sınıf Siber Güvenlik öğrencisiyim. Proje üretmeyi ve yapmayı seviyorum. Siber dünyayı daha güvenli kılmak için çalışıyorum.</p>
-                <div class="badges">
-                    <span class="badge">Python</span>
-                    <span class="badge">Robotik Kodlama</span>
-                    <span class="badge">Siber Güvenlik</span>
-                </div>
+                <p>19 yaşında, Siber Güvenlik öğrencisi. Proje üretmeyi seviyor.</p>
             </div>
-
-            <!-- Diğer Ekip Arkadaşları İçin Örnek Kart (Burayı çoğaltabilirsiniz) -->
-            <div class="card">
-                <span class="role">Ekip Üyesi Rolü</span>
-                <h2>Arkadaşının Adı</h2>
-                <p class="bio">Buraya ekip arkadaşının kısa tanıtımı gelecek. İlgi alanları ve hedefleri hakkında kısa bilgi verilebilir.</p>
-                <div class="badges">
-                    <span class="badge">Yazılım</span>
-                    <span class="badge">Tasarım</span>
-                </div>
-            </div>
-
+            <!-- Diğer kartlar buraya... -->
         </div>
     </div>
+
+    <script>
+        function filterGroup(className, btn) {
+            const cards = document.querySelectorAll('.card');
+            const btns = document.querySelectorAll('.filter-btn');
+            const duyuruAlani = document.getElementById('duyuru-alani');
+            const teamGrid = document.getElementById('team-grid');
+
+            btns.forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+
+            // Duyuru alanını gizle, üyeleri göster
+            duyuruAlani.style.display = 'none';
+            teamGrid.style.display = 'grid';
+
+            cards.forEach(card => {
+                if (className === 'all') card.style.display = 'block';
+                else if (card.classList.contains(className)) card.style.display = 'block';
+                else card.style.display = 'none';
+            });
+        }
+
+        function showAnnouncements(btn) {
+            const btns = document.querySelectorAll('.filter-btn');
+            const duyuruAlani = document.getElementById('duyuru-alani');
+            const teamGrid = document.getElementById('team-grid');
+
+            btns.forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+
+            // Üyeleri gizle, duyuru alanını göster
+            teamGrid.style.display = 'none';
+            duyuruAlani.style.display = 'block';
+        }
+    </script>
 
 </body>
 </html>
