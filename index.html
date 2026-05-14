@@ -18,9 +18,9 @@
         
         /* Özel Aksiyon Butonları */
         .btn-announcement { border-color: #ffc107; color: #856404; }
-        .btn-announcement:hover, .btn-announcement.active { background: #ffc107; color: #fff; }
+        .btn-announcement:hover, .btn-announcement.active { background: #ffc107; color: white; }
         .btn-chat { border-color: #00b894; color: #00b894; }
-        .btn-chat:hover { background: #00b894; color: #fff; }
+        .btn-chat:hover { background: #00b894; color: white; }
 
         .container { max-width: 1200px; margin: 20px auto; padding: 20px; }
         #duyuru-alani { display: none; background: #fff3cd; border-left: 5px solid #ffc107; padding: 20px; border-radius: 12px; margin-bottom: 20px; }
@@ -31,6 +31,21 @@
         
         .group-label { font-size: 0.75rem; color: #6c5ce7; font-weight: bold; text-transform: uppercase; margin-bottom: 8px; display: block; }
         h2 { margin: 5px 0; font-size: 1.2rem; }
+        p { font-size: 0.9rem; color: #636e72; line-height: 1.5; }
+
+        /* Sertifika Rozetleri Stili */
+        .badges { margin-top: 15px; }
+        .badge { 
+            display: inline-block; 
+            background: #dfe6e9; 
+            color: #2d3436; 
+            padding: 4px 10px; 
+            border-radius: 6px; 
+            font-size: 0.75rem; 
+            margin-right: 5px; 
+            margin-bottom: 5px;
+            font-weight: 500;
+        }
     </style>
 </head>
 <body>
@@ -46,7 +61,6 @@
         <button class="filter-btn btn-chat" onclick="window.open('SOHBET_LINKINIZ', '_blank')">💬 Genel Sohbet</button>
         <hr style="border: 0; border-top: 1px solid #eee; margin: 15px 0;">
         
-        <!-- TÜM GRUP BUTONLARI -->
         <button class="filter-btn active" onclick="filterGroup('all', this)">Hepsi</button>
         <button class="filter-btn" onclick="filterGroup('sanat-calisma', this)">Sanat Çalışma Grubu</button>
         <button class="filter-btn" onclick="filterGroup('kurumsal-isletim-dep', this)">Kurumsal İşletim Departmanı</button>
@@ -71,18 +85,23 @@
         </div>
 
         <div class="team-grid" id="team-grid">
-            <!-- Azra'nın Kartı (Teknoloji Grubu ve Üni Koor) -->
+            <!-- Azra'nın Kartı -->
             <div class="card teknoloji-calisma teknoloji-uni">
                 <span class="group-label">Teknoloji & Üniversite Koordinatörlüğü</span>
                 <h2>Azra Fatma Kalaycı</h2>
                 <p>19 yaşında, Siber Güvenlik öğrencisi. Proje üretmeyi ve yapmayı seviyor.</p>
+                <div class="badges">
+                    <span class="badge">Python</span>
+                    <span class="badge">Robotik Kodlama</span>
+                    <span class="badge">Siber Güvenlik</span>
+                </div>
             </div>
 
-            <!-- Örnek bir arkadaş kartı (Bunu diğer gruplar için çoğaltabilirsin) -->
+            <!-- Örnek bir arkadaş kartı -->
             <div class="card sanat-calisma">
                 <span class="group-label">Sanat Çalışma Grubu</span>
                 <h2>Arkadaşının Adı</h2>
-                <p>Grup üyesi tanıtım metni.</p>
+                <p>Grup üyesi tanıtım metni buraya gelecek.</p>
             </div>
         </div>
     </div>
