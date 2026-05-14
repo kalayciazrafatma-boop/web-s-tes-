@@ -8,7 +8,6 @@
         body { font-family: 'Inter', sans-serif; background-color: #f4f7f6; color: #333; margin: 0; padding: 0; }
         header { background-color: #ffffff; padding: 30px 20px; text-align: center; border-bottom: 2px solid #6c5ce7; }
         
-        /* Filtreleme Menüsü */
         .filter-container { max-width: 1200px; margin: 20px auto; text-align: center; padding: 0 10px; }
         .filter-btn { 
             background: #fff; border: 1px solid #ddd; color: #555;
@@ -17,19 +16,15 @@
         }
         .filter-btn:hover, .filter-btn.active { background: #6c5ce7; color: white; border-color: #6c5ce7; }
         
-        /* Özel Aksiyon Butonları Renkleri */
+        /* Özel Aksiyon Butonları */
         .btn-announcement { border-color: #ffc107; color: #856404; }
         .btn-announcement:hover, .btn-announcement.active { background: #ffc107; color: #fff; }
         .btn-chat { border-color: #00b894; color: #00b894; }
         .btn-chat:hover { background: #00b894; color: #fff; }
 
-        /* İçerik Alanı */
         .container { max-width: 1200px; margin: 20px auto; padding: 20px; }
-        
-        /* Duyurular Bölümü (Başlangıçta Gizli) */
         #duyuru-alani { display: none; background: #fff3cd; border-left: 5px solid #ffc107; padding: 20px; border-radius: 12px; margin-bottom: 20px; }
 
-        /* Kart Izgarası */
         .team-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; }
         .card { background: white; border-radius: 12px; padding: 20px; box-shadow: 0 2px 10px rgba(0,0,0,0.05); transition: 0.3s; border-left: 5px solid #6c5ce7; }
         .card:hover { transform: scale(1.02); }
@@ -42,39 +37,53 @@
 
     <header>
         <h1>Topluluk Paneli</h1>
-        <p>Grupları filtreleyebilir, duyurulara bakabilir veya sohbete katılabilirsiniz.</p>
+        <p>Tüm departmanlar ve koordinatörlükler aşağıda listelenmiştir.</p>
     </header>
 
     <div class="filter-container">
-        <!-- Duyuru ve Sohbet Butonları (Başa ekledik) -->
+        <!-- Aksiyon Butonları -->
         <button class="filter-btn btn-announcement" onclick="showAnnouncements(this)">📢 Duyurular</button>
         <button class="filter-btn btn-chat" onclick="window.open('SOHBET_LINKINIZ', '_blank')">💬 Genel Sohbet</button>
         <hr style="border: 0; border-top: 1px solid #eee; margin: 15px 0;">
         
-        <!-- Grup Filtreleri -->
+        <!-- TÜM GRUP BUTONLARI -->
         <button class="filter-btn active" onclick="filterGroup('all', this)">Hepsi</button>
         <button class="filter-btn" onclick="filterGroup('sanat-calisma', this)">Sanat Çalışma Grubu</button>
+        <button class="filter-btn" onclick="filterGroup('kurumsal-isletim-dep', this)">Kurumsal İşletim Departmanı</button>
+        <button class="filter-btn" onclick="filterGroup('kurumsal-isletim-koor', this)">Kurumsal İşletim Koordinatörlüğü</button>
+        <button class="filter-btn" onclick="filterGroup('saglik-cevre', this)">Sağlık Ve Çevre Çalışma Grubu</button>
+        <button class="filter-btn" onclick="filterGroup('sosyal-medya', this)">Sosyal Medya Koordinatörlüğü</button>
+        <button class="filter-btn" onclick="filterGroup('programlar', this)">Programlar Çalışma Grubu</button>
+        <button class="filter-btn" onclick="filterGroup('sanat-muzik', this)">Sanat Müzik Koor.</button>
+        <button class="filter-btn" onclick="filterGroup('sanat-tiyatro', this)">Sanat Tiyatro Koor.</button>
+        <button class="filter-btn" onclick="filterGroup('kisa-film', this)">Kısa Film Program Koor.</button>
+        <button class="filter-btn" onclick="filterGroup('moderasyon', this)">Moderasyon Koor.</button>
+        <button class="filter-btn" onclick="filterGroup('mentorluk', this)">Mentorlük Program Koor.</button>
         <button class="filter-btn" onclick="filterGroup('teknoloji-calisma', this)">Teknoloji Çalışma Grubu</button>
         <button class="filter-btn" onclick="filterGroup('teknoloji-uni', this)">Teknoloji Üniversite Koor.</button>
-        <!-- Diğer 12 butonu buraya aynı formatta ekleyebilirsin Azra -->
+        <button class="filter-btn" onclick="filterGroup('teknoloji-lise', this)">Teknoloji Lise Koor.</button>
     </div>
 
     <div class="container">
-        <!-- Duyuru İçeriği -->
         <div id="duyuru-alani">
             <h2>📢 Güncel Duyurular</h2>
-            <p>• Topluluğumuzun yeni web sitesi yayına girdi! (14.05.2024)</p>
-            <p>• Gelecek hafta Teknoloji Grubu toplantısı yapılacaktır.</p>
+            <p>• Topluluğumuzun yeni web sitesi ve tüm departman butonları yayına girdi!</p>
         </div>
 
-        <!-- Üye Kartları -->
         <div class="team-grid" id="team-grid">
+            <!-- Azra'nın Kartı (Teknoloji Grubu ve Üni Koor) -->
             <div class="card teknoloji-calisma teknoloji-uni">
-                <span class="group-label">Teknoloji & Üniversite Koor.</span>
+                <span class="group-label">Teknoloji & Üniversite Koordinatörlüğü</span>
                 <h2>Azra Fatma Kalaycı</h2>
-                <p>19 yaşında, Siber Güvenlik öğrencisi. Proje üretmeyi seviyor.</p>
+                <p>19 yaşında, Siber Güvenlik öğrencisi. Proje üretmeyi ve yapmayı seviyor.</p>
             </div>
-            <!-- Diğer kartlar buraya... -->
+
+            <!-- Örnek bir arkadaş kartı (Bunu diğer gruplar için çoğaltabilirsin) -->
+            <div class="card sanat-calisma">
+                <span class="group-label">Sanat Çalışma Grubu</span>
+                <h2>Arkadaşının Adı</h2>
+                <p>Grup üyesi tanıtım metni.</p>
+            </div>
         </div>
     </div>
 
@@ -87,8 +96,6 @@
 
             btns.forEach(b => b.classList.remove('active'));
             btn.classList.add('active');
-
-            // Duyuru alanını gizle, üyeleri göster
             duyuruAlani.style.display = 'none';
             teamGrid.style.display = 'grid';
 
@@ -106,12 +113,9 @@
 
             btns.forEach(b => b.classList.remove('active'));
             btn.classList.add('active');
-
-            // Üyeleri gizle, duyuru alanını göster
             teamGrid.style.display = 'none';
             duyuruAlani.style.display = 'block';
         }
     </script>
-
 </body>
 </html>
